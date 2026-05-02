@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: loban-api
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/loban}
+    username: ${DATABASE_USER:loban}
+    password: ${DATABASE_PASSWORD:loban}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      # Évite "cached plan must not change result type" avec Neon / PgBouncer (pool transactionnel).
+      data-source-properties:
+        prepareThreshold: 0
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+
+loban:
+  jwt:
+    secret: ${JWT_SECRET:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  cloudinary:
+    # Mettre à true + renseigner les 3 variables pour stocker les photos sur Cloudinary au lieu des data URL en base.
+    enabled: ${CLOUDINARY_ENABLED:false}
+    cloud-name: ${CLOUDINARY_CLOUD_NAME:}
+    api-key: ${CLOUDINARY_API_KEY:}
+    api-secret: ${CLOUDINARY_API_SECRET:}
+
+logging:
+  level:
+    org.springframework.security: INFO

@@ -1,0 +1,23 @@
+# Backend (Spring Boot) — ce dossier uniquement
+# (le frontend a son propre .gitignore)
+
+# Spring Boot / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+
+# Environnement local
+.env
+.env.local
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
